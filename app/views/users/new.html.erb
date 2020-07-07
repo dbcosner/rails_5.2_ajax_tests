@@ -1,0 +1,25 @@
+<h1>Users#new</h1>
+
+<h3>This form uses regular AJAX</h3>
+
+<%= form_for @user, url: users_path(format: "json"), html: {id: "ajax-form"}, remote: true do |f| %>
+  <%= f.label :name, "Enter any ol' user name:" %>
+  <br />
+  <%= f.text_field :name %>
+  <br />
+  <%= f.submit "Create" %>
+<% end %>
+
+<%= tag.div id: "ajax-result-display" %>
+
+<h3>This form uses Server-Generated JS</h3>
+
+<%= form_for @user, url: {action: "create"}, html: {id: "sgj-form"}, remote: true do |f| %>
+  <%= f.label :name, 'Enter any ol\' user name:' %>
+  <br />
+  <%= f.text_field :name %>
+  <br />
+  <%= f.submit "Create" %>
+<% end %>
+
+<%= tag.div id: "sgj-result-display" %>
