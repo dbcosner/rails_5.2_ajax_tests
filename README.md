@@ -14,7 +14,7 @@ form_for @user, url: users_path(format: "json"), html: {id: "ajax-form"}, remote
 
 ``app/assets/javascripts/users.js``
 
-A Rails-ujs event handler (ajax:success) is added to do something with the JSON received from the controller:
+A Rails-ujs event handler (``ajax:success``) is added to do something with the JSON received from the controller:
 
 ```javascript
 element.addEventListener("ajax:success", (event) => {
@@ -26,11 +26,9 @@ element.addEventListener("ajax:success", (event) => {
 
 ``app/controllers/users_controller.rb``
 
-The bottom form takes advantage of Server-generated JavaScript by simply specific ``format.js`` in the block given ``respond_to`` in the Users controller.
+The bottom form takes advantage of server-generated JavaScript. SGJ is implemented by adding ``format.js`` in the block given ``respond_to`` in the Users controller and creating the accompanying file: ``app/views/users/create.js.erb``
 
-``app/views/users/create.js.erb``
-
-Server-generated JavaScript is a convenient way to use information available at the Controller level in responding to an Ajax call.
+SGJ is a convenient way to use information available at the Controller level in responding to an Ajax call:
 
 ```ruby
 document.getElementById("sgj-result-display").innerHTML = "<%= @user.name %>";
