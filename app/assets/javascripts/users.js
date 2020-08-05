@@ -1,12 +1,28 @@
 console.log("users.js")
 
 window.addEventListener("load", () => {
-  const element = document.querySelector("#ajax-form");
-  element.addEventListener("ajax:success", (event) => {
+  // Get the response as JSON :
+  const form = document.querySelector("#ajax-form");
+  const ajaxDiv = document.querySelector("#ajax-result-display")
+
+  form.addEventListener("ajax:success", (event) => {
     const [_data, _status, xhr] = event.detail;
-    element.insertAdjacentHTML("beforeend", "<p>User ID: " + _data.id + "</p><p>User name: " + _data.name + "</p>");
+    ajaxDiv.innerHTML = "<p>User ID: " + _data.id + "</p><p>User name: " + _data.name + "</p>";
   });
-  element.addEventListener("ajax:error", () => {
-    element.insertAdjacentHTML("beforeend", "<p>Something went wrong!</p>");
+  form.addEventListener("ajax:error", () => {
+    ajaxDiv.innerHTML = "<p>Something went wrong!</p>";
+  });
+
+  // Get the response as HTML :
+  const htmlForm = document.querySelector("#ajax-html-form");
+  const ajaxHtmlDiv = document.querySelector("#ajax-html-result-display");
+
+  htmlForm.addEventListener("ajax:success", (event) => {
+    const [_data, _status, xhr] = event.detail;
+    const paragraphs = _data.querySelector("div");
+    ajaxHtmlDiv.innerHTML = paragraphs.innerHTML;
+  });
+  htmlForm.addEventListener("ajax:error", () => {
+    ajaxHtmlDiv.innerHTML = "<p>Something went wrong!</p>";
   });
 });

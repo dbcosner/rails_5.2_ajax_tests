@@ -1,3 +1,7 @@
 console.log("create.js.rb")
 
-document.getElementById("sgj-result-display").innerHTML = "<%= @user.name %>";
+<% if response.successful? %>
+  document.getElementById("sgj-result-display").innerHTML = "<p>User ID: <%= @user.id %></p><p>User name: <%= @user.name %></p>";
+<% else %>
+  document.getElementById("sgj-result-display").innerHTML = "<p>Something went wrong!</p>";
+<% end %>
